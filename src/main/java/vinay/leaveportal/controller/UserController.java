@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import vinay.leaveportal.dao.UserDAO;
 import vinay.leaveportal.entity.Users;
@@ -58,5 +59,13 @@ public class UserController {
         userDAO.delete(user);
         return "redirect:/displayusers";
 
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String loginUser(@RequestParam("username") String mail,
+                            @RequestParam("password") String password,
+                            Model model){
+
+        return "emphome";
     }
 }
