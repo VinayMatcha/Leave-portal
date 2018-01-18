@@ -2,6 +2,7 @@ package vinay.leaveportal.dao;
 
 import java.util.List;
 
+import vinay.leaveportal.entity.Employee;
 import vinay.leaveportal.entity.Users;
 
 public interface UserDAO {
@@ -11,6 +12,7 @@ public interface UserDAO {
     boolean update(Users user);
     boolean delete(Users user);
 
+    Employee loginUser();
     // business methods
     List<Users> listUsersByAccessType();
     List<Users> listUsers();
