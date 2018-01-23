@@ -8,10 +8,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import vinay.leaveportal.dao.UserDAO;
+import vinay.leaveportal.entity.Employee;
 import vinay.leaveportal.entity.Users;
 
 
-@Repository("UserDAO")
+@Repository("userDAO")
 @Transactional
 public class UserDAOImpl implements UserDAO{
 
@@ -44,6 +45,11 @@ public class UserDAOImpl implements UserDAO{
             exc.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public Employee loginUser() {
+        return null;
     }
 
     @Override

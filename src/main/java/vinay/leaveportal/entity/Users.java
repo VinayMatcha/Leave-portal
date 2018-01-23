@@ -33,8 +33,9 @@ public class Users {
     @Column(name="access_type")
     private String accessType;
 
+    public Users() {
 
-
+    }
 
     public Users(String name, String mailId, String password) {
         super();

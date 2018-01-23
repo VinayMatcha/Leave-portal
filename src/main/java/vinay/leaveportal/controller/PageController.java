@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import vinay.leaveportal.dao.EmployeeDAO;
 import vinay.leaveportal.dao.UserDAO;
@@ -16,8 +17,7 @@ import vinay.leaveportal.exception.EmployeeNotFoundException;
 import java.util.List;
 
 
-@Controller
-
+@RestController
 public class PageController {
 
 
@@ -72,17 +72,7 @@ public class PageController {
     }
 
 
-//    @RequestMapping(value = "/show/all/holidays")
-//    public ModelAndView showAllEmployees () {
-//
-//        ModelAndView mv = new ModelAndView("page");
-//        mv.addObject("title","All products");
-//        mv.addObject("userClickAllEmployees","true");
-//        List<Holiday> holidays = holidayDao.listHolidays();
-//        mv.addObject("holidays",holidays);
-//
-//        return mv;
-//    }
+
 
 
     @RequestMapping(value = "/show/{id}/employee")

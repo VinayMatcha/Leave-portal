@@ -10,8 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name="Holiday")
+@Entity
+@Table(name="Holiday")
 public class Holiday {
 
     @Id

@@ -8,14 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import vinay.leaveportal.dao.UserDAO;
 import vinay.leaveportal.entity.Users;
 
-@Controller
+@RestController
 public class UserController {
 
     private UserDAO userDAO;
@@ -31,25 +28,22 @@ public class UserController {
         System.out.println("Adding user ---- > "+user);
         userDAO.add(user);
         return "redirect:/displayusers";
-
     }
 
     @RequestMapping(value = "/displayusers")
-    public String displayUsers(Model model) {
+    public @ResponseBody List<Users> displayUsers(Model model) {
         List<Users> userList = userDAO.list();
-
         System.out.println("Displaying users" +userList);
-        model.addAttribute("userlist", userList);
-        return "displayusers";
+        return userList;
+    }
 
-    }
-    @RequestMapping(value = "/showform")
-    public String userForm(Model model) {
-        Users user = new Users();
-        model.addAttribute("userModel", user);
-        System.out.println("Entered Controller");
-        return "adduser";
-    }
+//    @RequestMapping(value = "/showform")
+//    public String userForm(Model model) {
+//        Users user = new Users();
+//        model.addAttribute("userModel", user);
+//        System.out.println("Entered Controller");
+//        return "adduser";
+//    }
 
     @RequestMapping(value = "/deleteUser")
     public String deleteUser(@RequestParam("id") int id,Model model,HttpServletResponse response) {
