@@ -6,9 +6,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import vinay.leaveportal.dao.UserDAO;
 import vinay.leaveportal.entity.Users;
 
@@ -37,13 +40,14 @@ public class UserController {
         return userList;
     }
 
-//    @RequestMapping(value = "/showform")
-//    public String userForm(Model model) {
-//        Users user = new Users();
-//        model.addAttribute("userModel", user);
-//        System.out.println("Entered Controller");
-//        return "adduser";
-//    }
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    public ResponseEntity<Void> createUser(@RequestBody Users user, UriComponentsBuilder ucBuilder) {
+        System.out.println("Creating User " + user.getName());
+        userDAO.add(user);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getLoginId()).toUri());
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
 
     @RequestMapping(value = "/deleteUser")
     public String deleteUser(@RequestParam("id") int id,Model model,HttpServletResponse response) {

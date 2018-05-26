@@ -3,18 +3,11 @@ package vinay.leaveportal.controller;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import vinay.leaveportal.dao.EmployeeDAO;
 import vinay.leaveportal.dao.UserDAO;
-import vinay.leaveportal.entity.Employee;
-import vinay.leaveportal.entity.Holiday;
-import vinay.leaveportal.exception.EmployeeNotFoundException;
-
-import java.util.List;
 
 
 @RestController
@@ -56,36 +49,6 @@ public class PageController {
         ModelAndView mv = new ModelAndView("page");
         mv.addObject("title","Contact Us");
         mv.addObject("userClickContact","true");
-        return mv;
-    }
-
-
-    @RequestMapping(value = "/show/all/employees")
-    public ModelAndView showAllEmployees () {
-
-        ModelAndView mv = new ModelAndView("page");
-        mv.addObject("title","All products");
-        List<Employee> employees = employeeDAO.listActiveEmployees();
-        mv.addObject("employees",employees);
-        mv.addObject("userClickAllEmployees","true");
-        return mv;
-    }
-
-
-
-
-
-    @RequestMapping(value = "/show/{id}/employee")
-    public ModelAndView showSingleEmployee (@PathVariable("id") int id ) throws EmployeeNotFoundException{
-
-        ModelAndView mv = new ModelAndView("page");
-        Employee employee = employeeDAO.get(id);
-        if(employee == null){
-            throw new EmployeeNotFoundException();
-        }
-        mv.addObject("title",employee.getId());
-        mv.addObject("Employee", employee);
-        mv.addObject("userClickShowEmployee","true");
         return mv;
     }
 

@@ -43,10 +43,8 @@ public class HibernateConfig {
     public SessionFactory getSessionFactory(DataSource dataSource) {
 
         LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource);
-
         builder.addProperties(getHibernateProperties());
         builder.scanPackages("vinay.leaveportal");
-
         return builder.buildSessionFactory();
 
     }
